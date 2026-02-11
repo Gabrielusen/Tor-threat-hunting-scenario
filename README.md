@@ -75,6 +75,8 @@ DeviceFileEvents
 | order by Timestamp asc
 ''''
 
+![A description of the image](1st.png)
+
 ### Hunt 2: TOR Installation Execution
 Searched for any ProcessCommandLine that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at 2025-03-13T06:15:01.5720012Z, an employee on the "threat-hunt-lab" device ran the file tor-browser-windows-x86_64-portable-14.0.1.exe from their Downloads folder, using a command that triggered a silent installation.
 
@@ -85,6 +87,8 @@ DeviceProcessEvents
 | where ProcessCommandLine contains "tor-browser"
 | project Timestamp, AccountName, FileName, FolderPath, ProcessCommandLine
 '''
+
+![A description of the image](2nd.png)
 
 ### Hunt 3: TOR Browser Launch
 Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at 2025-03-13T06:16:22.0107346Z. There were several other instances of firefox.exe (TOR) as well as tor.exe spawned afterwards.
@@ -98,6 +102,8 @@ DeviceProcessEvents
 | order by Timestamp desc
 '''
 
+![A description of the image](3rd.png)
+
 ### Hunt 4: TOR Network Activity
 Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At 2025-03-13T06:16:39.7272164Z, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address 188.213.31.125 on port 9001. The connection was initiated by the process tor.exe, located in the folder c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe.
 
@@ -109,6 +115,8 @@ DeviceNetworkEvents
 | where RemotePort in (9001, 9030, 9050, 9051, 9150)
 | project Timestamp, RemoteIP, RemotePort, InitiatingProcessFolderPath
 '''
+
+![A description of the image](4th.png)
 
 ## Chronological Event Timeline
 
