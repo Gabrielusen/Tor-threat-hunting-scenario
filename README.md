@@ -57,7 +57,9 @@ In Defender Portal:
 - Confirm:
   - Device name appears (e.g. threat-hunt-lab)
   - Status = Active
- 
+
+![A description of the image](Screenshot174.png)
+
 
 ## Now To create the Tor event Creation
 ### Steps the "Bad Actor" took Create Logs and IoCs:
@@ -73,8 +75,6 @@ In Defender Portal:
 
 - Delete the file.
 
- 
-![A description of the image](Screenshot174.png)
 
 ### Threat Hunting
 Switch to Microsoft Defender → Advanced Hunting.
