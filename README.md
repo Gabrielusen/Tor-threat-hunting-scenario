@@ -67,13 +67,13 @@ Switch to Microsoft Defender → Advanced Hunting.
 Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop, and the creation of a file called tor shopping list.txt on the desktop at 2025-03-13T07:11:20.5719934Z. These events began at 2025-03-13T06:12:03.9226543Z.
 
 Query used to locate events:
-''' 
+```json
 DeviceFileEvents
 | where DeviceName == "threat-hunt-lab"
 | where InitiatingProcessAccountName == "employee"
 | where FileName contains "tor"
 | order by Timestamp asc
-''''
+```
 
 ![A description of the image](1st.png)
 
@@ -81,12 +81,12 @@ DeviceFileEvents
 Searched for any ProcessCommandLine that contained the string "tor-browser-windows-x86_64-portable-14.0.1.exe". Based on the logs returned, at 2025-03-13T06:15:01.5720012Z, an employee on the "threat-hunt-lab" device ran the file tor-browser-windows-x86_64-portable-14.0.1.exe from their Downloads folder, using a command that triggered a silent installation.
 
 Query used to locate event:
-'''
+```json
 DeviceProcessEvents
 | where DeviceName == "threat-hunt-lab"
 | where ProcessCommandLine contains "tor-browser"
 | project Timestamp, AccountName, FileName, FolderPath, ProcessCommandLine
-'''
+```
 
 ![A description of the image](2nd.png)
 
@@ -94,13 +94,13 @@ DeviceProcessEvents
 Searched for any indication that user "employee" actually opened the TOR browser. There was evidence that they did open it at 2025-03-13T06:16:22.0107346Z. There were several other instances of firefox.exe (TOR) as well as tor.exe spawned afterwards.
 
 Query used to locate events:
-'''
+```json
 DeviceProcessEvents  
 | where DeviceName == "threat-hunt-lab"  
 | where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
 | order by Timestamp desc
-'''
+```
 
 ![A description of the image](3rd.png)
 
@@ -108,13 +108,13 @@ DeviceProcessEvents
 Searched for any indication the TOR browser was used to establish a connection using any of the known TOR ports. At 2025-03-13T06:16:39.7272164Z, an employee on the "threat-hunt-lab" device successfully established a connection to the remote IP address 188.213.31.125 on port 9001. The connection was initiated by the process tor.exe, located in the folder c:\users\employee\desktop\tor browser\browser\torbrowser\tor\tor.exe.
 
 Query used to locate events:
-'''
+```json
 DeviceNetworkEvents
 | where DeviceName == "threat-hunt-lab"
 | where InitiatingProcessFileName == "tor.exe"
 | where RemotePort in (9001, 9030, 9050, 9051, 9150)
 | project Timestamp, RemoteIP, RemotePort, InitiatingProcessFolderPath
-'''
+```
 
 ![A description of the image](4th.png)
 
