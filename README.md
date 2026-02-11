@@ -141,3 +141,15 @@ Timestamp: 2025-03-13T07:11:20.5719934Z
 Event: The user "employee" created a file named tor shopping list.txt on the desktop, potentially indicating a list or notes related to their TOR browser activities.
 Action: File creation detected.
 File Path: C:\Users\employee\Desktop\tor shopping list.txt
+
+
+## Isolate the Device
+- Defender Portal → Device → Isolate
+- Prevent further activity
+
+## Notify Management
+Document:
+- User
+- Device
+- Timeline
+- Risk summary
