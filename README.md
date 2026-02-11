@@ -26,7 +26,7 @@ In Azure Portal:
     - Username: employee
     - Password: strong password
 
-![A description of the image](Screenshot (173).png)
+![A description of the image](Screenshot173.png)
  
 ## Step 2: Networking
 - Public IP: Enabled
@@ -58,7 +58,7 @@ In Defender Portal:
   - Device name appears (e.g. threat-hunt-lab)
   - Status = Active
  
-![A description of the image](Screenshot (174).png)
+![A description of the image](Screenshot174.png)
 
 ### Threat Hunting
 Switch to Microsoft Defender → Advanced Hunting.
